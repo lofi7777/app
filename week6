@@ -1,0 +1,168 @@
+mainpage
+import 'package:flutter/material.dart';
+import 'dashboard.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Pizza Dashboard',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
+      home: Dashboard(),
+    );
+  }
+}
+
+
+dashboard.dart
+
+import 'package:flutter/material.dart';
+import 'topnavigationbar.dart';
+
+class Dashboard extends StatelessWidget {
+  const Dashboard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Welcome to WOW PIZZA!"),
+        centerTitle: true,
+        backgroundColor: Colors.deepOrange,
+      ),
+
+      body: Column(
+        children: [
+          Image.asset(
+            "images/meal.jpg",
+            width: 400,
+            height: 300,
+          ),
+
+          SizedBox(height: 20),
+
+          Text(
+            "Wanna order something?",
+            style: TextStyle(
+              decoration: TextDecoration.none,
+              fontSize: 30,
+            ),
+            textAlign: TextAlign.center,
+          ),
+
+          SizedBox(height: 30),
+
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TopNavigationBar(),
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber,
+            ),
+            child: Text("Let's Go"),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+topnavigation.dart
+
+import 'package:flutter/material.dart';
+
+class TopNavigationBar extends StatelessWidget {
+  const TopNavigationBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        body: MaterialApp(     // YOU ASKED TO WRAP BODY WITH MATERIALAPP
+          home: TabBarView(
+            children: [
+              // 1st page MaterialApp
+              MaterialApp(
+                home: Center(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "images/pizza1.jpg",
+                        width: 300,
+                        height: 250,
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        "Hi, I'm the Pizza Assistant. What can I help you order?",
+                        style: TextStyle(fontSize: 24),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // 2nd page MaterialApp
+              MaterialApp(
+                home: Center(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "images/pizza2.jpg",
+                        width: 300,
+                        height: 250,
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        "Hi, I'm the Pizza Assistant. What can I help you order?",
+                        style: TextStyle(fontSize: 24),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // 3rd page MaterialApp
+              MaterialApp(
+                home: Center(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "images/pizza3.jpg",
+                        width: 300,
+                        height: 250,
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        "Hi, I'm the Pizza Assistant. What can I help you order?",
+                        style: TextStyle(fontSize: 24),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
