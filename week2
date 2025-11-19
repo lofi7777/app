@@ -1,0 +1,95 @@
+main activit.java
+
+package com.example.toastapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.view.LayoutInflater;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnToast;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnToast = findViewById(R.id.btn_toast);
+
+        btnToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCustomToast();
+            }
+        });
+    }
+
+    private void showCustomToast() {
+
+        Toast toast = new Toast(getApplicationContext());
+
+        View view = LayoutInflater.from(this)
+                .inflate(R.layout.custom_toast_layout,
+                        (ViewGroup) findViewById(R.id.view_container));
+
+        toast.setView(view);
+
+        TextView txtMsg = view.findViewById(R.id.txtmsg);
+        txtMsg.setText("Message Sent Successfully!");
+
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+
+        toast.show();
+    }
+}
+
+main activity.ml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Toast"
+        android:id="@+id/btnToast"/>
+</LinearLayout>
+
+customtoast layout.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/view_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="11dp"
+    android:background="#99CC34">
+
+    <TextView
+        android:id="@+id/txtmsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="Toast Message"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+</LinearLayout>
